@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Deneme",
+    "type": "plugin",
+    "filename": "Deneme.plugin.js",
+    "description": "Kendi pluginim",
+    "version": "1.0.0",
+    "author": "Sen",
+    "download": "https://raw.githubusercontent.com/KULLANICI/REPO/main/plugins/Deneme.plugin.js"
+  }
+]
