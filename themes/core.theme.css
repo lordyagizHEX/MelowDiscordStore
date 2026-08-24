@@ -1,0 +1,507 @@
+/*
+================================================
+    TEMA: Pink Dream v2.0
+    Geliştirici: VaporousCreeper (Geliştirildi)
+    Renk Paleti: Pembe, Mor, Beyaz, Şeffaflık
+    Özellikler: Animasyonlar, Gölgeler, Yuvarlaklık, Neon Efektler
+================================================
+*/
+
+:root {
+    /* Arka Plan */
+    --background: url('https://images.alphacoders.com/632/632525.png');
+    --background-blur: blur(8px);
+    --background-overlay: rgba(0, 0, 0, 0.5);
+
+    /* Ana Renkler - Pembe Tonları */
+    --pink-1: #ff4d94;
+    --pink-2: #ff66a3;
+    --pink-3: #ff80b3;
+    --pink-4: #ff99c2;
+    --pink-5: #ffb3d1;
+    --pink-6: #ffcce0;
+    --pink-7: #ffe6f0;
+
+    /* Koyu Pembe / Mor */
+    --dark-pink-1: #cc0066;
+    --dark-pink-2: #99004d;
+    --dark-pink-3: #660033;
+
+    /* Şeffaflıklar */
+    --glass-1: rgba(255, 77, 148, 0.15);
+    --glass-2: rgba(255, 77, 148, 0.25);
+    --glass-3: rgba(255, 77, 148, 0.40);
+    --glass-4: rgba(255, 77, 148, 0.60);
+    --glass-5: rgba(255, 77, 148, 0.80);
+
+    /* Siyah Şeffaflıklar */
+    --dark-glass-1: rgba(0, 0, 0, 0.2);
+    --dark-glass-2: rgba(0, 0, 0, 0.4);
+    --dark-glass-3: rgba(0, 0, 0, 0.6);
+    --dark-glass-4: rgba(0, 0, 0, 0.8);
+
+    /* Metin Renkleri */
+    --text-primary: #ffffff;
+    --text-secondary: #ffb3d1;
+    --text-muted: rgba(255, 255, 255, 0.5);
+
+    /* Gölge ve Parıltı */
+    --glow: 0 0 20px rgba(255, 77, 148, 0.3);
+    --glow-strong: 0 0 40px rgba(255, 77, 148, 0.5);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+    /* Kenar Yuvarlaklık */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+
+    /* Geçişler */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   GENEL ARKA PLAN
+   ============================================ */
+#app-mount {
+    background: var(--background);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#app-mount .bg__960e4,
+#app-mount .app__160d8 {
+    background-color: var(--dark-glass-3);
+    backdrop-filter: var(--background-blur);
+}
+
+/* ============================================
+   SCROLLBAR - Pembe Temalı
+   ============================================ */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--dark-glass-1);
+    border-radius: var(--radius-lg);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--pink-1);
+    border-radius: var(--radius-lg);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--pink-3);
+    border-color: var(--pink-1);
+}
+
+/* ============================================
+   TOP BAR (Başlık Çubuğu)
+   ============================================ */
+#app-mount .title_c38106::before {
+    content: "🌸 Pink Dream v2.0 ✨ By VaporousCreeper";
+    color: var(--text-secondary);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-right: 12px;
+    text-shadow: var(--glow);
+}
+#app-mount .title_c38106 {
+    background-color: var(--dark-glass-3);
+    backdrop-filter: var(--background-blur);
+    border-bottom: 3px solid var(--pink-1);
+    box-shadow: var(--glow);
+}
+
+/* ============================================
+   SUNUCU LİSTESİ
+   ============================================ */
+#app-mount .guilds__5e434 {
+    background: var(--dark-glass-2);
+    backdrop-filter: var(--background-blur);
+    padding: 8px;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+
+/* Sunucu İkonları */
+#app-mount .wrapper__6e9f8 {
+    background: var(--glass-1) !important;
+    border-radius: var(--radius-md) !important;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+#app-mount .wrapper__6e9f8:hover {
+    background: var(--glass-3) !important;
+    border-color: var(--pink-1);
+    transform: scale(1.08);
+    box-shadow: var(--glow);
+}
+
+/* Sunucu Klasörleri */
+#app-mount .folderGroup__48112 .folderGroupBackground__48112 {
+    background: var(--dark-glass-2);
+    backdrop-filter: var(--background-blur);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-1);
+}
+
+/* ============================================
+   KANALLAR
+   ============================================ */
+#app-mount .containerDefault__29444 {
+    background: var(--glass-1);
+    border-radius: var(--radius-md);
+    padding: 6px 8px;
+    margin-top: 12px;
+    border-left: 3px solid var(--pink-1);
+    transition: var(--transition);
+}
+#app-mount .containerDefault__29444:hover {
+    background: var(--glass-2);
+    border-left-color: var(--pink-3);
+}
+
+/* Kanal İsimleri */
+#app-mount .wrapper__2ea32 {
+    background: var(--glass-1);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    padding: 4px 10px;
+}
+#app-mount .wrapper__2ea32:hover {
+    background: var(--glass-3);
+    transform: translateX(4px);
+}
+#app-mount .selected_c69b6d .wrapper__2ea32 {
+    background: var(--glass-4) !important;
+    border-right: 3px solid var(--pink-1);
+}
+
+/* ============================================
+   MESAJLAR
+   ============================================ */
+#app-mount .chatContent_f75fb0,
+#app-mount .chat_f75fb0 {
+    background: transparent;
+}
+
+/* Mesaj Kutuları */
+#app-mount .message__5126c.cozyMessage__5126c .container_b7e1cb,
+#app-mount .message__5126c.cozyMessage__5126c .contents_c19a55 {
+    background: var(--glass-1);
+    backdrop-filter: var(--background-blur);
+    padding: 8px 16px 8px 24px;
+    border-radius: var(--radius-md);
+    border-left: 3px solid transparent;
+    transition: var(--transition);
+}
+#app-mount .message__5126c:hover .container_b7e1cb {
+    border-left-color: var(--pink-1);
+    background: var(--glass-2);
+    box-shadow: var(--glow);
+}
+
+/* Mention (Bahsetme) */
+#app-mount .mention {
+    background: var(--glass-4) !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--radius-sm);
+    padding: 0 6px;
+    font-weight: 600;
+}
+#app-mount .mentioned__5126c::before {
+    background: var(--pink-1) !important;
+    width: 4px !important;
+}
+
+/* Linkler */
+#app-mount a[target="_blank"] {
+    color: var(--pink-2);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--pink-2);
+    transition: var(--transition);
+}
+#app-mount a[target="_blank"]:hover {
+    color: var(--pink-4);
+    border-bottom-color: var(--pink-4);
+}
+
+/* ============================================
+   MESAJ GİRİŞ ALANI
+   ============================================ */
+#app-mount .form_f75fb0 .wrapper__44df5,
+#app-mount .form_f75fb0 .scrollableContainer__74017 {
+    background: var(--dark-glass-3);
+    backdrop-filter: var(--background-blur);
+    border-radius: var(--radius-lg);
+    border: 2px solid transparent;
+    transition: var(--transition);
+}
+#app-mount .form_f75fb0 .scrollableContainer__74017:focus-within {
+    border-color: var(--pink-1);
+    box-shadow: var(--glow);
+}
+
+/* ============================================
+   VOICE CHANNEL (Ses Kanalları)
+   ============================================ */
+#app-mount .voiceUser__07f91 {
+    transition: var(--transition);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    margin-left: 0;
+}
+#app-mount .voiceUser__07f91:hover {
+    background: var(--glass-2);
+    transform: translateX(8px);
+}
+#app-mount .voiceUser__07f91[data-speaking="true"] .userAvatar__55bab {
+    box-shadow: 0 0 0 3px var(--pink-1), var(--glow-strong);
+}
+#app-mount .voiceUser__07f91[data-speaking="true"]::after {
+    content: "";
+    background: linear-gradient(to right, var(--glass-4), transparent);
+    border-left: 4px solid var(--pink-1);
+    padding: 0 150px 12px 0;
+    position: relative;
+    top: -28px;
+    z-index: -1;
+}
+
+/* ============================================
+   KULLANICI PANELİ (Alt kısım)
+   ============================================ */
+#app-mount .panels__5e434 {
+    background: var(--dark-glass-3);
+    backdrop-filter: var(--background-blur);
+    border-top: 2px solid var(--pink-1);
+    padding: 8px;
+}
+#app-mount .panels__5e434 .button__201d5:hover {
+    background: var(--glass-3);
+    box-shadow: var(--glow);
+}
+#app-mount .button__67645[aria-label="Disconnect"] {
+    background: var(--glass-4) !important;
+}
+#app-mount .button__67645[aria-label="Disconnect"]:hover {
+    background: var(--pink-1) !important;
+    box-shadow: var(--glow-strong);
+}
+
+/* ============================================
+   AYARLAR (Settings)
+   ============================================ */
+#app-mount .sidebarRegion__23e6b .side_aa8da2 .item_aa8da2 {
+    background: var(--glass-1);
+    border-radius: var(--radius-sm);
+    margin: 4px 0;
+    transition: var(--transition);
+    padding: 6px 12px;
+}
+#app-mount .sidebarRegion__23e6b .side_aa8da2 .item_aa8da2:hover {
+    background: var(--glass-3);
+    transform: translateX(4px);
+}
+#app-mount .sidebarRegion__23e6b .side_aa8da2 .selected_aa8da2 {
+    background: var(--glass-4) !important;
+    border-left: 3px solid var(--pink-1);
+}
+
+/* Butonlar */
+#app-mount .button_a22cb0.primary_a22cb0,
+#app-mount .lookFilled__201d5 {
+    background: var(--pink-1) !important;
+    transition: var(--transition);
+    border-radius: var(--radius-md);
+}
+#app-mount .button_a22cb0.primary_a22cb0:hover,
+#app-mount .lookFilled__201d5:hover {
+    background: var(--pink-3) !important;
+    transform: scale(1.02);
+    box-shadow: var(--glow-strong);
+}
+#app-mount .button_a22cb0.primary_a22cb0 span,
+#app-mount .lookFilled__201d5 .contents__201d5 {
+    color: var(--text-primary) !important;
+}
+
+/* Anahtarlar (Switch) */
+#app-mount .container__3f21e.checked__3f21e {
+    background-color: var(--pink-1) !important;
+    box-shadow: var(--glow);
+}
+#app-mount .container__3f21e.checked__3f21e svg path {
+    fill: var(--pink-1);
+}
+
+/* ============================================
+   POPUPLAR VE MODALLAR
+   ============================================ */
+#app-mount .modal__4f3da,
+#app-mount .messagesPopoutWrap_e8b59c,
+#app-mount .menu_c1e9c4 {
+    background: var(--dark-glass-3);
+    backdrop-filter: var(--background-blur);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-1);
+    box-shadow: var(--shadow);
+}
+#app-mount .header__49fc1 {
+    background: var(--glass-3);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-bottom: 2px solid var(--pink-1);
+}
+#app-mount .footer__49fc1 {
+    background: var(--dark-glass-2);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* ============================================
+   EMOJI & GIF PICKER
+   ============================================ */
+#app-mount .contentWrapper__08434 {
+    background: var(--dark-glass-3);
+    backdrop-filter: var(--background-blur);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-1);
+}
+#app-mount .contentWrapper__08434 .wrapper__72c38:focus-within {
+    border-color: var(--pink-1);
+    box-shadow: var(--glow);
+}
+
+/* ============================================
+   SUNUCU ÜYELERİ
+   ============================================ */
+#app-mount .member__5d473 {
+    background: var(--glass-1);
+    border-radius: var(--radius-sm);
+    margin: 2px 12px;
+    padding: 4px 8px;
+    transition: var(--transition);
+}
+#app-mount .member__5d473:hover {
+    background: var(--glass-3);
+    transform: translateX(6px);
+}
+#app-mount .membersGroup_c8ffbb {
+    background: var(--glass-3);
+    border-radius: var(--radius-md);
+    padding: 4px 12px;
+    margin: 8px 16px 4px 16px;
+    border-left: 3px solid var(--pink-1);
+}
+#app-mount .membersGroup_c8ffbb span {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* ============================================
+   BİLDİRİMLER VE BADGELER
+   ============================================ */
+#app-mount .numberBadge__2b1f5 {
+    background: var(--pink-1) !important;
+    color: var(--text-primary);
+    box-shadow: var(--glow);
+    border-radius: var(--radius-lg);
+}
+#app-mount .mention__3b95d,
+#app-mount .mentionsBadge__933a1 .numberBadge__2b1f5 {
+    background: var(--pink-1) !important;
+    box-shadow: var(--glow);
+}
+
+/* ============================================
+   YENİ MESAJ BUTONU
+   ============================================ */
+#app-mount .newMessagesBar__0f481 {
+    background: var(--pink-1) !important;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glow-strong);
+    transition: var(--transition);
+}
+#app-mount .newMessagesBar__0f481:hover {
+    background: var(--pink-3) !important;
+    transform: scale(1.02);
+}
+#app-mount .newMessagesBar__0f481 .span__0f481,
+#app-mount .newMessagesBar__0f481 .barButtonAlt__0f481 {
+    color: var(--text-primary);
+}
+
+/* ============================================
+   DİĞER GELİŞTİRMELER
+   ============================================ */
+/* Tüm kartlar ve containerlar */
+#app-mount .card_b5493b,
+#app-mount .container_d9c848,
+#app-mount .shopCard_c3d04b {
+    background: var(--glass-1);
+    backdrop-filter: var(--background-blur);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+#app-mount .card_b5493b:hover,
+#app-mount .container_d9c848:hover,
+#app-mount .shopCard_c3d04b:hover {
+    background: var(--glass-3);
+    border-color: var(--pink-1);
+    transform: translateY(-2px);
+    box-shadow: var(--glow);
+}
+
+/* Input alanları */
+#app-mount .inputDefault__0f084 {
+    background: var(--dark-glass-2);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    color: var(--text-primary);
+}
+#app-mount .inputDefault__0f084:focus {
+    border-color: var(--pink-1);
+    box-shadow: var(--glow);
+}
+
+/* Seçim kutuları (Dropdown) */
+#app-mount .select_a16aea {
+    background: var(--dark-glass-2);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+}
+#app-mount .select_a16aea:focus-within {
+    border-color: var(--pink-1);
+}
+
+/* Embeds */
+#app-mount .embedFull__623de {
+    background: var(--glass-1);
+    border-left: 4px solid var(--pink-1);
+    border-radius: var(--radius-md) !important;
+}
+
+/* ============================================
+   ANİMASYONLAR - EKSTRA DETAYLAR
+   ============================================ */
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 10px var(--pink-1); }
+    50% { box-shadow: 0 0 30px var(--pink-3); }
+    100% { box-shadow: 0 0 10px var(--pink-1); }
+}
+#app-mount .button_a22cb0.primary_a22cb0:hover {
+    animation: pulse-glow 1.5s infinite;
+}
+
+/* Hover için hafif yumuşak geçişler */
+#app-mount * {
+    transition: var(--transition);
+}
+
+/* ============================================
+   TEMA SONU - KEYİFLİ KULLANIMLAR 🌸
+   ============================================ */
