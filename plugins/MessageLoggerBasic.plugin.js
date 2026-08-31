@@ -1,96 +1,260 @@
 /**
- * @name MessageLoggerBasic
- * @description Silinen mesajları gösteren basit bir plugin.
- * @version 1.0.0
- * @author SeninAdın
- * @source https://github.com/seninrepo
+ * @name MessageKeeper
+ * @author YourName
+ * @version 1.1.0
+ * @description Silinen mesajları MelowApi Events ile kaydeder ve kırmızı kartlar halinde gösterir.
  */
 
-module.exports = class MessageLoggerBasic {
-    // Plugin başlatıldığında çalışacak
+module.exports = class MessageKeeper {
+    constructor() {
+        this.name = "MessageKeeper";
+        this.messages = new Map();
+        this.deletedMessages = new Map();
+        this.unsubscribers = [];
+        this.root = null;
+    }
+
     start() {
-        // Discord'un mesaj silme olayını yakala
-        this.handleMessageDelete = this.handleMessageDelete.bind(this);
-        
-        // Discord'un Webpack modüllerini bul
-        const MessageStore = BdApi.Webpack.getModule(
-            m => m?.getMessage && m?.getMessages
-        );
-        
-        const ChannelStore = BdApi.Webpack.getModule(
-            m => m?.getChannel && m?.getChannels
-        );
-        
-        const UserStore = BdApi.Webpack.getModule(
-            m => m?.getUser && m?.getUsers
-        );
-        
-        // Bunları plugin instance'ına kaydet
-        this.MessageStore = MessageStore;
-        this.ChannelStore = ChannelStore;
-        this.UserStore = UserStore;
-        
-        // Discord'un mesaj silme olayını dinle
-        this.dispatcher = BdApi.Webpack.getModule(
-            m => m?.subscribe && typeof m.subscribe === 'function'
-        );
-        
-        if (this.dispatcher) {
-            this.dispatcher.subscribe('MESSAGE_DELETE', this.handleMessageDelete);
-        }
-        
-        console.log('[MessageLoggerBasic] Plugin başlatıldı!');
-    }
-    
-    // Mesaj silme olayı yakalandığında
-    handleMessageDelete(data) {
         try {
-            // Silinen mesajın ID'si ve kanal ID'si
-            const messageId = data.id;
-            const channelId = data.channelId;
-            
-            // Mesajı ve kanalı bul (Discord'un cache'inden)
-            const channel = this.ChannelStore?.getChannel(channelId);
-            const message = this.MessageStore?.getMessage(channelId, messageId);
-            
-            if (!message) {
-                // Mesaj cache'de yoksa (Discord zaten silmiş)
-                console.log('[MessageLoggerBasic] Mesaj cache\'de bulunamadı (çok eski veya Discord tarafından silinmiş)');
-                return;
-            }
-            
-            // Mesajı yazan kullanıcıyı bul
-            const author = this.UserStore?.getUser(message.authorId);
-            const authorName = author ? author.username : 'Bilinmeyen Kullanıcı';
-            
-            // Silinen mesajın içeriği
-            const content = message.content || '(Boş mesaj veya dosya)';
-            
-            // Mesajı bildirim olarak göster
-            BdApi.UI.showToast(
-                `🗑️ ${authorName} silinen mesaj: "${content}"`,
-                {
-                    type: 'warning',
-                    icon: '🗑️',
-                    timeout: 8000 // 8 saniye göster
-                }
+            this.injectStyles();
+            this.createPanel();
+            this.registerEvents();
+
+            MelowApi.UI.showToast(
+                "MessageKeeper aktif. Silinen mesajlar kaydedilecek.",
+                {type: "success", timeout: 3000}
             );
-            
-            // Konsola da yaz
-            console.log(`[MessageLoggerBasic] ${authorName} sildi: ${content}`);
-            console.log(`   Kanal: #${channel?.name || 'bilinmiyor'}`);
-            console.log(`   Mesaj ID: ${messageId}`);
-            
-        } catch (error) {
-            console.error('[MessageLoggerBasic] Hata:', error);
+
+            MelowApi.Logger.info(this.name, "Plugin başlatıldı.");
+        }
+        catch (error) {
+            MelowApi.Logger.error(this.name, "Başlatma hatası:", error);
+            MelowApi.UI.showToast("MessageKeeper başlatılamadı.", {
+                type: "error",
+                timeout: 3000
+            });
         }
     }
-    
-    // Plugin durdurulduğunda (devre dışı bırakıldığında)
+
+    injectStyles() {
+        MelowApi.DOM.addStyle("message-keeper-styles", `
+            #message-keeper-panel {
+                position: fixed;
+                right: 18px;
+                bottom: 18px;
+                width: min(380px, calc(100vw - 36px));
+                max-height: min(60vh, 600px);
+                overflow-y: auto;
+                z-index: 10000;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                pointer-events: auto;
+            }
+
+            .message-keeper-card {
+                position: relative;
+                padding: 12px;
+                border: 2px solid #ed4245;
+                border-radius: 8px;
+                background: color-mix(in srgb, #ed4245 14%, var(--background-floating, #1e1f22));
+                box-shadow: 0 6px 20px rgba(0, 0, 0, .35);
+                color: var(--text-normal, #f2f3f5);
+                font-family: inherit;
+            }
+
+            .message-keeper-title {
+                color: #ff7b82;
+                font-size: 12px;
+                font-weight: 700;
+                margin-bottom: 6px;
+            }
+
+            .message-keeper-author {
+                color: var(--header-secondary, #b5bac1);
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+
+            .message-keeper-content {
+                white-space: pre-wrap;
+                overflow-wrap: anywhere;
+                font-size: 13px;
+                line-height: 1.4;
+            }
+
+            .message-keeper-time {
+                color: var(--text-muted, #949ba4);
+                font-size: 11px;
+                margin-top: 8px;
+            }
+
+            .message-keeper-remove {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                border: 0;
+                border-radius: 4px;
+                padding: 3px 7px;
+                color: white;
+                background: #ed4245;
+                cursor: pointer;
+            }
+        `);
+    }
+
+    createPanel() {
+        this.root = document.createElement("div");
+        this.root.id = "message-keeper-panel";
+        document.body.append(this.root);
+    }
+
+    registerEvents() {
+        this.unsubscribers.push(
+            MelowApi.Events.on("MESSAGE_CREATE", event => {
+                this.cacheMessage(event?.message ?? event);
+            })
+        );
+
+        this.unsubscribers.push(
+            MelowApi.Events.on("MESSAGE_UPDATE", event => {
+                this.cacheMessage(event?.message ?? event);
+            })
+        );
+
+        this.unsubscribers.push(
+            MelowApi.Events.on("MESSAGE_DELETE", event => {
+                this.handleDelete(event);
+            })
+        );
+
+        this.unsubscribers.push(
+            MelowApi.Events.on("MESSAGE_DELETE_BULK", event => {
+                this.handleBulkDelete(event);
+            })
+        );
+    }
+
+    cacheMessage(message) {
+        if (!message?.id) return;
+
+        this.messages.set(message.id, {
+            id: message.id,
+            channelId: message.channel_id ?? message.channelId,
+            content: message.content ?? "",
+            author: message.author ?? null,
+            timestamp: message.timestamp ?? Date.now()
+        });
+    }
+
+    handleDelete(event) {
+        const messageId = event?.id ?? event?.messageId ?? event?.message_id;
+        if (!messageId || this.deletedMessages.has(messageId)) return;
+
+        const cached = this.messages.get(messageId);
+        const message = event?.message ?? cached;
+
+        if (!message) {
+            MelowApi.Logger.debug(
+                this.name,
+                "Silinen mesaj cache içinde bulunamadı:",
+                messageId
+            );
+            return;
+        }
+
+        const deleted = {
+            ...message,
+            id: messageId,
+            deletedAt: Date.now()
+        };
+
+        this.deletedMessages.set(messageId, deleted);
+        this.messages.delete(messageId);
+
+        this.renderDeletedMessage(deleted);
+
+        MelowApi.UI.showToast(
+            `${deleted.author?.username ?? "Birisi"} bir mesaj sildi.`,
+            {type: "warning", timeout: 3000}
+        );
+    }
+
+    handleBulkDelete(event) {
+        const ids = event?.ids ?? event?.messageIds ?? event?.message_ids ?? [];
+
+        for (const id of ids) {
+            this.handleDelete({
+                id,
+                channelId: event?.channelId ?? event?.channel_id
+            });
+        }
+    }
+
+    renderDeletedMessage(message) {
+        if (!this.root || this.root.querySelector(`[data-message-id="${message.id}"]`)) {
+            return;
+        }
+
+        const card = document.createElement("div");
+        card.className = "message-keeper-card";
+        card.dataset.messageId = message.id;
+
+        const remove = document.createElement("button");
+        remove.className = "message-keeper-remove";
+        remove.textContent = "Sil";
+        remove.onclick = () => this.permanentlyDelete(message.id);
+
+        const title = document.createElement("div");
+        title.className = "message-keeper-title";
+        title.textContent = "🗑️ SİLİNEN MESAJ";
+
+        const author = document.createElement("div");
+        author.className = "message-keeper-author";
+        author.textContent = `👤 ${message.author?.username ?? "Bilinmeyen kullanıcı"}`;
+
+        const content = document.createElement("div");
+        content.className = "message-keeper-content";
+        content.textContent = message.content || "[Metin içeriği yok]";
+
+        const time = document.createElement("div");
+        time.className = "message-keeper-time";
+        time.textContent = `Silinme zamanı: ${new Date(message.deletedAt).toLocaleString()}`;
+
+        card.append(remove, title, author, content, time);
+        this.root.prepend(card);
+    }
+
+    permanentlyDelete(messageId) {
+        this.deletedMessages.delete(messageId);
+        this.root?.querySelector(`[data-message-id="${messageId}"]`)?.remove();
+
+        MelowApi.UI.showToast("Kayıt kalıcı olarak kaldırıldı.", {
+            type: "info",
+            timeout: 2000
+        });
+    }
+
     stop() {
-        if (this.dispatcher && this.handleMessageDelete) {
-            this.dispatcher.unsubscribe('MESSAGE_DELETE', this.handleMessageDelete);
+        for (const unsubscribe of this.unsubscribers) {
+            try {
+                unsubscribe?.();
+            }
+            catch (error) {
+                MelowApi.Logger.error(this.name, "Listener temizleme hatası:", error);
+            }
         }
-        console.log('[MessageLoggerBasic] Plugin durduruldu!');
+
+        this.unsubscribers = [];
+        this.messages.clear();
+        this.deletedMessages.clear();
+
+        this.root?.remove();
+        this.root = null;
+
+        MelowApi.DOM.removeStyle("message-keeper-styles");
+        MelowApi.Patcher.unpatchAll(this.name);
+
+        MelowApi.Logger.info(this.name, "Plugin durduruldu.");
     }
-}
+};
