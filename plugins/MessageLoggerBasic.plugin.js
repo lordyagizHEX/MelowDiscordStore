@@ -1,8 +1,8 @@
 /**
  * @name MessageKeeper
  * @author YourName
- * @version 1.2.0
- * @description Silinen mesajları sohbet akışı içinde kırmızı renk ve ikonla gösterir.
+ * @version 1.1.0
+ * @description Silinen mesajları MelowApi Events ile kaydeder ve kırmızı kartlar halinde gösterir.
  */
 
 module.exports = class MessageKeeper {
@@ -11,15 +11,17 @@ module.exports = class MessageKeeper {
         this.messages = new Map();
         this.deletedMessages = new Map();
         this.unsubscribers = [];
+        this.root = null;
     }
 
     start() {
         try {
             this.injectStyles();
+            this.createPanel();
             this.registerEvents();
 
             MelowApi.UI.showToast(
-                "MessageKeeper aktif. Silinen mesajlar sohbet içinde gösterilecek.",
+                "MessageKeeper aktif. Silinen mesajlar kaydedilecek.",
                 {type: "success", timeout: 3000}
             );
 
@@ -36,16 +38,75 @@ module.exports = class MessageKeeper {
 
     injectStyles() {
         MelowApi.DOM.addStyle("message-keeper-styles", `
-            .message-keeper-deleted {
-                color: #ed4245 !important;
+            #message-keeper-panel {
+                position: fixed;
+                right: 18px;
+                bottom: 18px;
+                width: min(380px, calc(100vw - 36px));
+                max-height: min(60vh, 600px);
+                overflow-y: auto;
+                z-index: 10000;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                pointer-events: auto;
             }
-            .message-keeper-icon {
-                margin-left: 6px;
-                font-size: 14px;
-                vertical-align: middle;
+
+            .message-keeper-card {
+                position: relative;
+                padding: 12px;
+                border: 2px solid #ed4245;
+                border-radius: 8px;
+                background: color-mix(in srgb, #ed4245 14%, var(--background-floating, #1e1f22));
+                box-shadow: 0 6px 20px rgba(0, 0, 0, .35);
+                color: var(--text-normal, #f2f3f5);
+                font-family: inherit;
+            }
+
+            .message-keeper-title {
+                color: #ff7b82;
+                font-size: 12px;
+                font-weight: 700;
+                margin-bottom: 6px;
+            }
+
+            .message-keeper-author {
+                color: var(--header-secondary, #b5bac1);
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+
+            .message-keeper-content {
+                white-space: pre-wrap;
+                overflow-wrap: anywhere;
+                font-size: 13px;
+                line-height: 1.4;
+            }
+
+            .message-keeper-time {
+                color: var(--text-muted, #949ba4);
+                font-size: 11px;
+                margin-top: 8px;
+            }
+
+            .message-keeper-remove {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                border: 0;
+                border-radius: 4px;
+                padding: 3px 7px;
+                color: white;
+                background: #ed4245;
                 cursor: pointer;
             }
         `);
+    }
+
+    createPanel() {
+        this.root = document.createElement("div");
+        this.root.id = "message-keeper-panel";
+        document.body.append(this.root);
     }
 
     registerEvents() {
@@ -111,7 +172,12 @@ module.exports = class MessageKeeper {
         this.deletedMessages.set(messageId, deleted);
         this.messages.delete(messageId);
 
-        this.renderInChat(deleted);
+        this.renderDeletedMessage(deleted);
+
+        MelowApi.UI.showToast(
+            `${deleted.author?.username ?? "Birisi"} bir mesaj sildi.`,
+            {type: "warning", timeout: 3000}
+        );
     }
 
     handleBulkDelete(event) {
@@ -125,27 +191,48 @@ module.exports = class MessageKeeper {
         }
     }
 
-    renderInChat(message) {
-        // Eğer mesaj DOM üzerindeyse (şu an ekranda göriniyorsa) doğrudan bulup kırmızı yapabiliriz
-        const messageElement = document.querySelector(`[data-message-id="${message.id}"]`);
-        if (messageElement) {
-            const contentElement = messageElement.querySelector("[id^='message-content-'], .messageContent-2qWWQC, [class*='messageContent']");
-            if (contentElement && !contentElement.classList.contains("message-keeper-deleted")) {
-                contentElement.classList.add("message-keeper-deleted");
-                
-                const emojiSpan = document.createElement("span");
-                emojiSpan.className = "message-keeper-icon";
-                emojiSpan.textContent = "🙁";
-                emojiSpan.title = `Silinme zamanı: ${new Date(message.deletedAt).toLocaleTimeString()}`;
-                contentElement.appendChild(emojiSpan);
-            }
-        } else {
-            // Eğer DOM'da o an görünmüyorsa MelowApi arayüzü ile bilgi verilebilir
-            MelowApi.UI.showToast(
-                `${message.author?.username ?? "Birisi"}: "${message.content}" mesajını sildi.`,
-                {type: "warning", timeout: 4000}
-            );
+    renderDeletedMessage(message) {
+        if (!this.root || this.root.querySelector(`[data-message-id="${message.id}"]`)) {
+            return;
         }
+
+        const card = document.createElement("div");
+        card.className = "message-keeper-card";
+        card.dataset.messageId = message.id;
+
+        const remove = document.createElement("button");
+        remove.className = "message-keeper-remove";
+        remove.textContent = "Sil";
+        remove.onclick = () => this.permanentlyDelete(message.id);
+
+        const title = document.createElement("div");
+        title.className = "message-keeper-title";
+        title.textContent = "🗑️ SİLİNEN MESAJ";
+
+        const author = document.createElement("div");
+        author.className = "message-keeper-author";
+        author.textContent = `👤 ${message.author?.username ?? "Bilinmeyen kullanıcı"}`;
+
+        const content = document.createElement("div");
+        content.className = "message-keeper-content";
+        content.textContent = message.content || "[Metin içeriği yok]";
+
+        const time = document.createElement("div");
+        time.className = "message-keeper-time";
+        time.textContent = `Silinme zamanı: ${new Date(message.deletedAt).toLocaleString()}`;
+
+        card.append(remove, title, author, content, time);
+        this.root.prepend(card);
+    }
+
+    permanentlyDelete(messageId) {
+        this.deletedMessages.delete(messageId);
+        this.root?.querySelector(`[data-message-id="${messageId}"]`)?.remove();
+
+        MelowApi.UI.showToast("Kayıt kalıcı olarak kaldırıldı.", {
+            type: "info",
+            timeout: 2000
+        });
     }
 
     stop() {
@@ -161,6 +248,9 @@ module.exports = class MessageKeeper {
         this.unsubscribers = [];
         this.messages.clear();
         this.deletedMessages.clear();
+
+        this.root?.remove();
+        this.root = null;
 
         MelowApi.DOM.removeStyle("message-keeper-styles");
         MelowApi.Patcher.unpatchAll(this.name);
