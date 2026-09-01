@@ -1,11 +1,84 @@
+```json
 [
   {
+    "id": "deneme",
     "name": "Deneme",
     "type": "plugin",
     "filename": "Deneme.plugin.js",
-    "description": "Kendi pluginim",
+
+    "description": "MelowDiscord için örnek plugin.",
+    "longDescription": "MelowDiscord üzerinde çalışan örnek ve test amaçlı bir plugin.",
+
     "version": "1.0.0",
-    "author": "Sen",
-    "download": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/plugins/Deneme.plugin.js"
+
+    "author": {
+      "name": "Sen",
+      "id": "lordyagizHEX"
+    },
+
+    "icon": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/assets/deneme.png",
+
+    "download": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/plugins/Deneme.plugin.js",
+
+    "repository": "https://github.com/lordyagizHEX/MelowDiscordStore",
+
+    "homepage": "https://github.com/lordyagizHEX/MelowDiscordStore",
+
+    "support": {
+      "issues": "https://github.com/lordyagizHEX/MelowDiscordStore/issues"
+    },
+
+    "license": "MIT",
+
+    "tags": [
+      "utility",
+      "example",
+      "melowdiscord"
+    ],
+
+    "category": "Utility",
+
+    "compatibility": {
+      "melowdiscord": ">=1.0.0",
+      "betterdiscord": true
+    },
+
+    "api": {
+      "melow": ">=1.0.0",
+      "bdapi": ">=1.0.0"
+    },
+
+    "permissions": [
+      "storage",
+      "ui"
+    ],
+
+    "dependencies": {},
+
+    "requirements": [],
+
+    "release": {
+      "channel": "stable",
+      "releasedAt": "2026-09-01",
+      "changelog": [
+        "İlk sürüm yayınlandı."
+      ]
+    },
+
+    "integrity": {
+      "algorithm": "sha256",
+      "hash": ""
+    },
+
+    "stats": {
+      "downloads": 0,
+      "rating": 0,
+      "ratingCount": 0
+    },
+
+    "featured": false,
+    "verified": false,
+    "active": true
   }
 ]
+```
