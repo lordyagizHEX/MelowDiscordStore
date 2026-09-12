@@ -1,9 +1,22 @@
 {
   "version": "1.13.21",
-  "title": "MelowDiscord v1.13.21",
-  "changelog": [
-    "✨ Yeni özellikler eklendi",
-    "⚡ Performans iyileştirmeleri",
-    "🐛 Hatalar düzeltildi"
-  ]
+  "title": "MelowDiscord v1.13.21 - Ultimate Neon & Performance Edition ⚡",
+  "releaseDate": "12 Eylül 2026",
+  "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
+  "urgent": false,
+  "changelog": {
+    "features": [
+      "🎨 Theme Studio: %100 Cam Şeffaflığı ve Donma Engelleme Sistemi",
+      "⚡ Ultra Hızlı Başlatma ve Optimizasyon Motoru",
+      "🚀 Discord İçi Canlı Güncelleme ve Otomatik Kalıcı Sürüm Kaydı"
+    ],
+    "improvements": [
+      "💎 Neon Parıltı Efektleri ve Yumuşak Animasyon İyileştirmeleri",
+      "🛡️ Bellek Sızıntısı (Memory Leak) Koruması & Performans Artışı"
+    ],
+    "fixes": [
+      "🐛 Yeniden başlatma sonrasında uyarının tekrar çıkması engellendi",
+      "🔧 Ayarlara girildiğinde oluşan anlık donma ve renk bozulması düzeltildi"
+    ]
+  }
 }
