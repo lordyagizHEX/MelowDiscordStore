@@ -1,7 +1,7 @@
 {
-    "version": "1.14.0",
-    "title": "MelowDiscord v1.14.0 - Next-Gen Sürümü 🚀",
-    "releaseDate": "2026-09-27",
+    "version": "1.40.0",
+    "title": "MelowDiscord v1.40.0 - Next-Gen Sürümü 🚀",
+    "releaseDate": "2026-09-30",
     "urgent": false,
     "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
     "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
@@ -14,7 +14,7 @@
     "changelog": [
         "✨ Yenilenmiş Modern Eklenti & Tema Yönetim Arayüzü (Cam Efektli Glassmorphic)",
         "🚀 Eklenti Filtreleme Çipleri: Tümü, Aktif, Kapalı ve Anlık Sayaçlar",
-        "🔄 Eklentilere Özel Tek Tıkla 'Yeniden Yükle' Butonu",
+        "🔄 Eklentilaere Özel Tek Tıkla 'Yeniden Yükle' Butonu",
         "💎 Tıklanınca GitHub'a Yönlendirmeyen Bağımsız Rozet Sistemi",
         "💖 Ultra Şık Partner (Couple) Kartı ve Canlı Süre Sayacı",
         "⚡ Performans İyileştirmeleri ve Hızlı Güncelleme Doğrulayıcı"
