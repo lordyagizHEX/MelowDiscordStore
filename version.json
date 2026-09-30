@@ -1,38 +1,38 @@
 {
-    "version": "1.14.1",
-    "title": "MelowDiscord v1.14.1 - Next-Gen Sürümü 🚀",
-    "releaseDate": "2026-09-30",
-    "urgent": false,
-    "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
-    "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
-    "meta": {
-        "asar_sha256": "792c7eeabdbb8dd7d5fed89dad3905f0648cb9d2bda5122a353e0144dbdb2186",
-        "asar_size_bytes": 2471832,
-        "asar_size_mb": "2.36 MB",
-        "build_timestamp": "2026-09-27T10:00:55.874Z"
-    },
-    "changelog": [
-        "✨ Yenilenmiş Modern Eklenti & Tema Yönetim Arayüzü (Cam Efektli Glassmorphic)",
-        "🚀 Eklenti Filtreleme Çipleri: Tümü, Aktif, Kapalı ve Anlık Sayaçlar",
-        "🔄 Eklentilaere Özel Tek Tıkla 'Yeniden Yükle' Butonu",
-        "💎 Tıklanınca GitHub'a Yönlendirmeyen Bağımsız Rozet Sistemi",
-        "💖 Ultra Şık Partner (Couple) Kartı ve Canlı Süre Sayacı",
-        "⚡ Performans İyileştirmeleri ve Hızlı Güncelleme Doğrulayıcı"
+  "version": "1.14.1",
+  "title": "MelowDiscord v1.14.1 - Next-Gen Sürümü 🚀",
+  "releaseDate": "2026-09-30",
+  "urgent": false,
+  "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
+  "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
+  "meta": {
+    "asar_sha256": "f52e945e02c64dcfc938b603d096a41a72d3ffb8e44cfe6c23ee7b177b4a1f1d",
+    "asar_size_bytes": 2485333,
+    "asar_size_mb": "2.37 MB",
+    "build_timestamp": "2026-09-30T17:21:33.304Z"
+  },
+  "changelog": [
+    "✨ Yenilenmiş Modern Eklenti & Tema Yönetim Arayüzü (Cam Efektli Glassmorphic)",
+    "🚀 Eklenti Filtreleme Çipleri: Tümü, Aktif, Kapalı ve Anlık Sayaçlar",
+    "🔄 Eklentilere Özel Tek Tıkla 'Yeniden Yükle' Butonu",
+    "💎 Tıklanınca GitHub'a Yönlendirmeyen Bağımsız Rozet Sistemi",
+    "💖 Ultra Şık Partner (Couple) Kartı ve Canlı Süre Sayacı",
+    "⚡ Performans İyileştirmeleri ve Hızlı Güncelleme Doğrulayıcı"
+  ],
+  "categories": {
+    "features": [
+      "Modern Discord Glassmorphic Plugin Yönetim Arayüzü",
+      "Anlık Durum Rozeti (Aktif/Kapalı) ve Filtre Sekmeleri",
+      "Kullanıcı Profilinde Canlı Partner Süre Sayacı ve Aşk Notu"
     ],
-    "categories": {
-        "features": [
-            "Modern Discord Glassmorphic Plugin Yönetim Arayüzü",
-            "Anlık Durum Rozeti (Aktif/Kapalı) ve Filtre Sekmeleri",
-            "Kullanıcı Profilinde Canlı Partner Süre Sayacı ve Aşk Notu"
-        ],
-        "improvements": [
-            "Rozetler tıklandığında tarayıcı açılması engellendi",
-            "D1 Veritabanı otomatik başlatıcı ve esnek rank sorgulayıcı",
-            "Güncelleme penceresinde detaylı sürüm karşılaştırması"
-        ],
-        "fixes": [
-            "CSS gölge parazitleri temizlendi",
-            "ASAR dosya kilitlenme hataları için güvenli yazma köprüsü eklendi"
-        ]
-    }
+    "improvements": [
+      "Rozetler tıklandığında tarayıcı açılması engellendi",
+      "D1 Veritabanı otomatik başlatıcı ve esnek rank sorgulayıcı",
+      "Güncelleme penceresinde detaylı sürüm karşılaştırması"
+    ],
+    "fixes": [
+      "CSS gölge parazitleri temizlendi",
+      "ASAR dosya kilitlenme hataları için güvenli yazma köprüsü eklendi"
+    ]
+  }
 }
