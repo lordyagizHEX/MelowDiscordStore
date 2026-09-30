@@ -26,7 +26,10 @@ const defaults = {
     notificationSound: false,
     chatEffects: true,
     typingIndicator: true,
-    musicHud: true
+    musicHud: true,
+    chatTextMode: "theme",
+    chatTextColor: "#402638",
+    chatGradientColors: ["#ff4f9a", "#ffb347", "#ffe45e", "#49d9d0"]
 };
 
 const settingLabels = {
@@ -80,16 +83,32 @@ body.hkui-typing-enabled [class*="typing"]::after { display: inline-block; margi
 .hkui-setting-copy { display: grid; gap: 2px; }
 .hkui-setting-name { color: var(--header-primary); font-size: 13px; font-weight: 600; }
 .hkui-setting-note { color: var(--text-muted); font-size: 11px; }
+.hkui-text-color-settings { display: grid; gap: 9px; padding: 12px; border: 1px solid color-mix(in srgb, #e879a5 30%, var(--background-modifier-accent)); border-radius: 8px; background: color-mix(in srgb, var(--background-secondary) 95%, #f7c5d9); }
+.hkui-text-color-title { color: var(--header-primary); font-size: 13px; font-weight: 600; }
+.hkui-text-mode-select { width: 100%; min-height: 34px; padding: 5px 8px; border: 1px solid var(--background-modifier-accent); border-radius: 6px; background: var(--background-primary); color: var(--text-normal); }
+.hkui-color-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.hkui-color-control { display: grid; min-width: 0; gap: 4px; color: var(--text-muted); font-size: 11px; }
+.hkui-color-input { box-sizing: border-box; width: 100%; height: 34px; padding: 3px; border: 1px solid var(--background-modifier-accent); border-radius: 6px; background: var(--background-primary); cursor: pointer; }
+.hkui-chat-text-gradient, .hkui-chat-text-rainbow { background-image: linear-gradient(90deg, var(--hkui-chat-gradient-colors)); background-repeat: no-repeat; background-size: 400% 100%; background-position: 0% 50%; background-clip: text; -webkit-background-clip: text; color: transparent !important; -webkit-text-fill-color: transparent !important; animation: hkui-rainbow-flow 4s linear infinite; }
+body[data-hkui-chat-text-mode="solid"] .hkui-chat-text-solid { color: var(--hkui-chat-text-color) !important; -webkit-text-fill-color: var(--hkui-chat-text-color) !important; }
+.hkui-chat-text-rainbow { animation-duration: 2.2s; }
 @keyframes hkui-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 @keyframes hkui-send { 0% { opacity: 0; transform: translateY(6px) scale(.8); } 35% { opacity: 1; } 100% { opacity: 0; transform: translateY(-14px) scale(1.1); } }
 @keyframes hkui-heart { 0%, 100% { transform: scale(.9); opacity: .65; } 50% { transform: scale(1.15); opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .hkui-decoration, .hkui-send-pop::after, body.hkui-typing-enabled [class*="typing"]::after { animation: none; } }
+@keyframes hkui-rainbow-flow { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+@media (prefers-reduced-motion: reduce) { .hkui-decoration, .hkui-send-pop::after, body.hkui-typing-enabled [class*="typing"]::after, .hkui-chat-text-gradient, .hkui-chat-text-rainbow { animation: none; } }
 @media (max-width: 480px) { .hkui-inline-bubble { max-width: calc(100vw - 72px); padding: 10px 16px 10px 46px !important; font-size: 14px !important; } .hkui-music-hud { right: 10px; bottom: 10px; width: calc(100vw - 20px); } }
 `;
 
 class HelloKittyUI {
     constructor() {
         this.settings = {...defaults, ...(Data.load("settings") || {})};
+        const validColor = color => typeof color === "string" && /^#[\da-f]{6}$/i.test(color);
+        if (!["theme", "solid", "gradient", "rainbow"].includes(this.settings.chatTextMode)) this.settings.chatTextMode = defaults.chatTextMode;
+        if (!validColor(this.settings.chatTextColor)) this.settings.chatTextColor = defaults.chatTextColor;
+        this.settings.chatGradientColors = defaults.chatGradientColors.map((color, index) =>
+            validColor(this.settings.chatGradientColors?.[index]) ? this.settings.chatGradientColors[index] : color
+        );
         this.observer = null;
         this.musicTimer = null;
         this.musicHud = null;
@@ -110,6 +129,55 @@ class HelloKittyUI {
         const plugin = this;
         function SettingsPanel() {
             const [settings, setSettings] = React.useState({...plugin.settings});
+            const updateTextSettings = (patch, refreshBubbles = false) => {
+                const next = {...plugin.settings, ...patch};
+                setSettings(next);
+                plugin.settings = next;
+                Data.save("settings", next);
+                plugin.applyTextSettings();
+                if (refreshBubbles && next.chatBubbles) plugin.refreshChatBubbles();
+            };
+            const textColorControls = React.createElement("section", {className: "hkui-text-color-settings"},
+                React.createElement("span", {className: "hkui-text-color-title"}, "Sohbet yazı rengi"),
+                React.createElement("select", {
+                    className: "hkui-text-mode-select",
+                    value: settings.chatTextMode,
+                    "aria-label": "Sohbet yazı rengi modu",
+                    onChange: event => updateTextSettings({chatTextMode: event.currentTarget.value}, true)
+                },
+                    React.createElement("option", {value: "theme"}, "Discord temasını kullan"),
+                    React.createElement("option", {value: "solid"}, "Tek renk"),
+                    React.createElement("option", {value: "gradient"}, "4 renkli gradient"),
+                    React.createElement("option", {value: "rainbow"}, "Hareketli rainbow")
+                ),
+                settings.chatTextMode === "solid"
+                    ? React.createElement("label", {className: "hkui-color-control"}, "Yazı rengi",
+                        React.createElement("input", {
+                            className: "hkui-color-input",
+                            type: "color",
+                            value: settings.chatTextColor,
+                            onChange: event => updateTextSettings({chatTextColor: event.currentTarget.value})
+                        })
+                    )
+                    : null,
+                settings.chatTextMode === "gradient" || settings.chatTextMode === "rainbow"
+                    ? React.createElement("div", {className: "hkui-color-grid"}, settings.chatGradientColors.map((color, index) =>
+                        React.createElement("label", {className: "hkui-color-control", key: index}, `Renk ${index + 1}`,
+                            React.createElement("input", {
+                                className: "hkui-color-input",
+                                type: "color",
+                                value: color,
+                                "aria-label": `Gradient renk ${index + 1}`,
+                                onChange: event => {
+                                    const colors = [...plugin.settings.chatGradientColors];
+                                    colors[index] = event.currentTarget.value;
+                                    updateTextSettings({chatGradientColors: colors});
+                                }
+                            })
+                        )
+                    ))
+                    : null
+            );
             return React.createElement("section", {className: "hkui-settings"},
                 React.createElement("h2", {className: "hkui-settings-title"}, "🎀 Hello Kitty görünümü"),
                 Object.entries(settingLabels).map(([key, [label, note]]) => React.createElement("label", {
@@ -128,7 +196,8 @@ class HelloKittyUI {
                 }), React.createElement("span", {className: "hkui-setting-copy"},
                     React.createElement("span", {className: "hkui-setting-name"}, label),
                     React.createElement("span", {className: "hkui-setting-note"}, note)
-                )))
+                ))),
+                textColorControls
             );
         }
         return React.createElement(SettingsPanel);
@@ -144,6 +213,7 @@ class HelloKittyUI {
 
     applySettings() {
         const body = document.body;
+        this.applyTextSettings();
         body.classList.toggle("hkui-cursor-enabled", this.settings.normalCursor);
         body.classList.toggle("hkui-hover-enabled", this.settings.hoverCursor);
         body.classList.toggle("hkui-chat-enabled", this.settings.chatEffects);
@@ -179,7 +249,7 @@ class HelloKittyUI {
             document.querySelectorAll(".hkui-decoration").forEach(element => element.remove());
             document.querySelectorAll(".hkui-composer-host").forEach(element => element.classList.remove("hkui-composer-host"));
         }
-        if (!this.settings.chatBubbles) document.querySelectorAll(".hkui-inline-bubble").forEach(element => element.classList.remove("hkui-inline-bubble"));
+        if (!this.settings.chatBubbles) this.clearChatBubbles();
 
         if (this.settings.musicHud && !this.musicTimer) {
             this.musicHud = document.createElement("aside");
@@ -219,6 +289,10 @@ class HelloKittyUI {
     }
 
     processAddedNode(node) {
+        if (node instanceof Text) {
+            if (this.settings.chatBubbles) this.applyBubbleTextNode(node);
+            return;
+        }
         if (!(node instanceof Element)) return;
         if (this.settings.decorations) {
             if (node.matches('[class*="channelTextArea"]')) this.decorateComposer(node);
@@ -245,7 +319,73 @@ class HelloKittyUI {
 
     applyChatBubble(message) {
         const content = message.querySelector('[class*="markup"]');
-        if (content?.textContent?.trim()) content.classList.add("hkui-inline-bubble");
+        if (!content?.textContent?.trim()) return;
+        content.classList.add("hkui-inline-bubble");
+        this.applyBubbleTextMode(content);
+    }
+
+    applyTextSettings() {
+        const body = document.body;
+        if (!body) return;
+        body.dataset.hkuiChatTextMode = this.settings.chatTextMode;
+        body.style.setProperty("--hkui-chat-text-color", this.settings.chatTextColor);
+        body.style.setProperty("--hkui-chat-gradient-colors", this.settings.chatGradientColors.join(", "));
+    }
+
+    applyBubbleTextMode(content) {
+        const mode = this.settings.chatTextMode;
+        const wrappers = content.querySelectorAll(".hkui-chat-text");
+        if (mode === "theme") {
+            wrappers.forEach(wrapper => this.unwrapChatText(wrapper));
+            return;
+        }
+
+        const wrapperClass = `hkui-chat-text hkui-chat-text-${mode}`;
+        if (wrappers.length) {
+            wrappers.forEach(wrapper => { wrapper.className = wrapperClass; });
+            return;
+        }
+        const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT);
+        const textNodes = [];
+        let textNode;
+        while ((textNode = walker.nextNode())) {
+            const parent = textNode.parentElement;
+            if (!textNode.nodeValue.trim() || !parent || parent.closest(".hkui-chat-text, pre, code")) continue;
+            textNodes.push(textNode);
+        }
+        for (const node of textNodes) {
+            this.wrapChatTextNode(node, wrapperClass);
+        }
+    }
+
+    applyBubbleTextNode(node) {
+        const parent = node.parentElement;
+        if (!parent || !node.nodeValue.trim() || parent.closest(".hkui-chat-text, pre, code")) return;
+        const message = parent.closest('[id^="chat-messages-"]');
+        const content = message?.querySelector('[class*="markup"]');
+        if (!content || !content.contains(node) || this.settings.chatTextMode === "theme") return;
+        this.wrapChatTextNode(node, `hkui-chat-text hkui-chat-text-${this.settings.chatTextMode}`);
+    }
+
+    wrapChatTextNode(node, wrapperClass) {
+        const wrapper = document.createElement("span");
+        wrapper.className = wrapperClass;
+        node.parentNode.replaceChild(wrapper, node);
+        wrapper.appendChild(node);
+    }
+
+    unwrapChatText(wrapper) {
+        const parent = wrapper.parentNode;
+        if (!parent) return;
+        while (wrapper.firstChild) parent.insertBefore(wrapper.firstChild, wrapper);
+        wrapper.remove();
+    }
+
+    clearChatBubbles() {
+        document.querySelectorAll(".hkui-inline-bubble").forEach(content => {
+            content.querySelectorAll(".hkui-chat-text").forEach(wrapper => this.unwrapChatText(wrapper));
+            content.classList.remove("hkui-inline-bubble");
+        });
     }
 
     onMessageCreate(event) {
@@ -420,9 +560,12 @@ class HelloKittyUI {
         for (const timeout of this.timeouts) clearTimeout(timeout);
         this.timeouts.clear();
         document.body.classList.remove("hkui-cursor-enabled", "hkui-hover-enabled", "hkui-chat-enabled", "hkui-chat-bubbles-enabled", "hkui-typing-enabled");
+        document.body.removeAttribute("data-hkui-chat-text-mode");
+        document.body.style.removeProperty("--hkui-chat-text-color");
+        document.body.style.removeProperty("--hkui-chat-gradient-colors");
         document.querySelectorAll(".hkui-decoration").forEach(element => element.remove());
         document.querySelectorAll(".hkui-composer-host").forEach(element => element.classList.remove("hkui-composer-host"));
-        document.querySelectorAll(".hkui-inline-bubble").forEach(element => element.classList.remove("hkui-inline-bubble"));
+        this.clearChatBubbles();
         document.querySelectorAll(".hkui-send-pop").forEach(element => element.classList.remove("hkui-send-pop"));
         this.musicHud?.remove();
         DOM.removeStyle("HelloKittyUI");
