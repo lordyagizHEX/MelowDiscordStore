@@ -1,83 +1,47 @@
-[
-  {
-    "id": "deneme",
-    "name": "Deneme",
+{
+    "id": "message-logger-basic",
+    "name": "MessageLoggerBasic",
     "type": "plugin",
-    "filename": "Deneme.plugin.js",
-
-    "description": "MelowDiscord için örnek plugin.",
-    "longDescription": "MelowDiscord üzerinde çalışan örnek ve test amaçlı bir plugin.",
-
+    "filename": "MessageLoggerBasic.plugin.js",
+    "description": "Silinen mesajları yakalar ve görüntüler.",
+    "longDescription": "MessageLoggerBasic, MelowApi Events üzerinden mesaj silme olaylarını takip eder ve silinen mesajları kullanıcıya gösterir.",
     "version": "1.0.0",
-
-    "author": {
-      "name": "Sen",
-      "id": "lordyagizHEX"
-    },
-
-    "icon": "https://i.ibb.co/bj3rBXdr/content1.png",
-    "thumbnail_url": "https://i.ibb.co/VYNVh2SZ/content.png",
-
-    "download": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/plugins/Deneme.plugin.js",
-
+    "author": "YourName",
+    "icon": "https://i.ibb.co/GQZH4LCw/content1.png",
+    "thumbnail_url": "https://i.ibb.co/LzLdzDfW/deletebanner.png",
+    "download": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/plugins/MessageLoggerBasic.plugin.js",
     "repository": "https://github.com/lordyagizHEX/MelowDiscordStore",
-
     "homepage": "https://github.com/lordyagizHEX/MelowDiscordStore",
-
     "support": {
-      "issues": "https://github.com/lordyagizHEX/MelowDiscordStore/issues"
+        "issues": "https://github.com/lordyagizHEX/MelowDiscordStore/issues"
     },
-
     "license": "MIT",
-
     "tags": [
-      "utility",
-      "example",
-      "melowdiscord"
+        "message",
+        "logger",
+        "deleted-messages",
+        "utility"
     ],
-
     "category": "Utility",
-
     "compatibility": {
-      "melowdiscord": ">=1.0.0",
-      "betterdiscord": true
+        "discord": "stable",
+        "melowdiscord": ">=1.0.0"
     },
-
-    "api": {
-      "melow": ">=1.0.0",
-      "bdapi": ">=1.0.0"
-    },
-
-    "permissions": [
-      "storage",
-      "ui"
-    ],
-
-    "dependencies": {},
-
+    "api": "MelowApi",
+    "permissions": [],
+    "dependencies": [],
     "requirements": [],
-
     "release": {
-      "channel": "stable",
-      "releasedAt": "2026-09-01",
-      "changelog": [
-        "İlk sürüm yayınlandı."
-      ]
+        "channel": "stable"
     },
-
     "integrity": {
-      "algorithm": "sha256",
-      "hash": ""
+        "sha256": ""
     },
-
     "stats": {
-      "downloads": 0,
-      "rating": 0,
-      "ratingCount": 0
+        "likes": 0,
+        "downloads": 0
     },
-
     "featured": false,
     "verified": false,
     "active": true
-  }
-]
+}
