@@ -1,4 +1,3 @@
-
 [
   {
     "id": "deneme",
@@ -16,7 +15,8 @@
       "id": "lordyagizHEX"
     },
 
-    "icon": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/assets/deneme.png",
+    "icon": "https://i.ibb.co/bj3rBXdr/content1.png",
+    "thumbnail_url": "https://i.ibb.co/VYNVh2SZ/content.png",
 
     "download": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/plugins/Deneme.plugin.js",
 
