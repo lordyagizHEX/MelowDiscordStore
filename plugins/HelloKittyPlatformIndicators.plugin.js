@@ -48,11 +48,15 @@ body.hkui-cursor-enabled, body.hkui-cursor-enabled *:not(input):not(textarea):no
 body.hkui-hover-enabled a, body.hkui-hover-enabled button, body.hkui-hover-enabled [role="button"], body.hkui-hover-enabled [tabindex]:not([tabindex="-1"]) { cursor: ${hoverCursor} !important; }
 .hkui-composer-host { position: relative !important; }
 .hkui-decoration { position: absolute; z-index: 2; top: -13px; right: 16px; padding: 1px 7px; border: 1px solid rgba(232, 121, 165, .32); border-radius: 999px; background: color-mix(in srgb, var(--background-secondary) 86%, #f7c5d9); color: #dc6595; font-size: 13px; line-height: 18px; pointer-events: none; animation: hkui-float 3s ease-in-out infinite; }
-.hkui-inline-bubble { position: relative !important; display: inline-block !important; width: fit-content; min-width: min(180px, 60vw); max-width: min(560px, 72vw); margin: 8px 0 13px 0 !important; padding: 14px 26px 14px 20px !important; overflow: visible !important; border: 2px solid #ed70a2 !important; border-radius: 7px 23px 23px 23px !important; background: linear-gradient(105deg, #ffe4ef 0%, #fff8fb 54%, #ffddeb 100%) !important; color: #291328 !important; box-shadow: 0 0 14px rgba(239, 91, 156, .25), inset 0 1px 5px rgba(255, 255, 255, .9) !important; font-size: 15px !important; line-height: 1.5 !important; overflow-wrap: anywhere; }
-.hkui-inline-bubble::before { position: absolute; bottom: -14px; left: -17px; z-index: 2; display: block; width: 38px; height: 38px; border-radius: 50%; background: #fff0f6 url("${kittyImage}") center/contain no-repeat; content: ""; filter: drop-shadow(0 2px 4px rgba(180, 72, 119, .28)); }
-.hkui-inline-bubble::after { position: absolute; top: -17px; right: 3px; color: #d95791; content: "🎀"; font-size: 22px; filter: drop-shadow(0 2px 3px rgba(180, 72, 119, .2)); }
+.hkui-inline-bubble { position: relative !important; display: flow-root !important; box-sizing: border-box; width: fit-content; min-width: 0; max-width: min(640px, calc(100vw - 96px)); margin: 6px 0 11px !important; padding: 12px 19px 12px 48px !important; overflow-wrap: anywhere; border: 1px solid color-mix(in srgb, #e879a5 52%, var(--background-modifier-accent)) !important; border-radius: 5px 18px 18px 18px !important; background: linear-gradient(135deg, color-mix(in srgb, var(--background-secondary) 91%, #ffd3e3), color-mix(in srgb, var(--background-secondary) 82%, #fff0f6)) !important; color: var(--text-normal) !important; box-shadow: 0 3px 10px rgba(120, 54, 83, .12), inset 0 1px 0 rgba(255, 255, 255, .48) !important; font-size: 15px !important; line-height: 1.55 !important; }
+.hkui-inline-bubble::before { position: absolute; bottom: 5px; left: 5px; z-index: 2; display: block; width: 34px; height: 34px; box-sizing: border-box; border: 2px solid var(--background-primary); border-radius: 50%; background: #fff0f6 url("${kittyImage}") center/contain no-repeat; content: ""; filter: drop-shadow(0 2px 3px rgba(180, 72, 119, .24)); }
+.hkui-inline-bubble::after { position: absolute; top: -14px; right: 5px; color: #d95791; content: "🎀"; font-size: 19px; filter: drop-shadow(0 2px 3px rgba(180, 72, 119, .2)); }
+.hkui-inline-bubble pre { max-width: 100%; overflow: auto; border-radius: 8px; }
+.hkui-inline-bubble img:not([class*="emoji"]) { max-width: min(100%, 420px); height: auto; border-radius: 8px; }
+.hkui-inline-bubble a { overflow-wrap: anywhere; }
 body.hkui-chat-bubbles-enabled [id^="chat-messages-"] [class*="username"] { color: #f04fa6 !important; }
 .hkui-music-hud { position: fixed; z-index: 9998; right: 18px; bottom: 18px; display: grid; grid-template-columns: 58px minmax(0, 1fr); align-items: center; gap: 12px; width: min(360px, calc(100vw - 36px)); padding: 11px 14px 11px 11px; border: 1px solid color-mix(in srgb, #e879a5 28%, var(--background-modifier-accent)); border-radius: 15px; background: color-mix(in srgb, var(--background-secondary) 93%, #f7c5d9); color: var(--header-primary); box-shadow: 0 10px 30px rgba(26, 18, 22, .24); backdrop-filter: blur(18px); }
+.hkui-music-hud[hidden] { display: none; }
 .hkui-music-cover { display: grid; place-items: center; width: 58px; height: 58px; overflow: hidden; border-radius: 10px; background: #f3b6cd; color: #b64f7a; font-size: 20px; object-fit: cover; box-shadow: 0 3px 10px rgba(102, 44, 69, .18); }
 .hkui-music-copy { display: grid; min-width: 0; gap: 3px; }
 .hkui-music-eyebrow { display: flex; align-items: center; gap: 5px; color: var(--text-muted); font-size: 9px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
@@ -80,7 +84,7 @@ body.hkui-typing-enabled [class*="typing"]::after { display: inline-block; margi
 @keyframes hkui-send { 0% { opacity: 0; transform: translateY(6px) scale(.8); } 35% { opacity: 1; } 100% { opacity: 0; transform: translateY(-14px) scale(1.1); } }
 @keyframes hkui-heart { 0%, 100% { transform: scale(.9); opacity: .65; } 50% { transform: scale(1.15); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .hkui-decoration, .hkui-send-pop::after, body.hkui-typing-enabled [class*="typing"]::after { animation: none; } }
-@media (max-width: 480px) { .hkui-inline-bubble { min-width: min(145px, 55vw); max-width: 68vw; padding: 11px 21px 11px 16px !important; font-size: 14px !important; } .hkui-music-hud { right: 10px; bottom: 10px; width: calc(100vw - 20px); } }
+@media (max-width: 480px) { .hkui-inline-bubble { max-width: calc(100vw - 72px); padding: 10px 16px 10px 46px !important; font-size: 14px !important; } .hkui-music-hud { right: 10px; bottom: 10px; width: calc(100vw - 20px); } }
 `;
 
 class HelloKittyUI {
@@ -93,6 +97,9 @@ class HelloKittyUI {
         this.musicElements = null;
         this.dispatcher = null;
         this.dispatcherSubscribed = false;
+        this.audioContext = null;
+        this.lastNotificationAt = 0;
+        this.started = false;
         this.timeouts = new Set();
         this.onKeyDown = this.onKeyDown.bind(this);
         this.onMutations = this.onMutations.bind(this);
@@ -111,7 +118,6 @@ class HelloKittyUI {
                 }, React.createElement("input", {
                     type: "checkbox",
                     checked: !!settings[key],
-                    disabled: key === "notificationSound" && !settings.chatBubbles,
                     onChange: event => {
                         const next = {...settings, [key]: event.currentTarget.checked};
                         setSettings(next);
@@ -129,6 +135,8 @@ class HelloKittyUI {
     }
 
     start() {
+        if (this.started) return;
+        this.started = true;
         DOM.addStyle("HelloKittyUI", styles);
         document.addEventListener("keydown", this.onKeyDown, true);
         this.applySettings();
@@ -142,13 +150,13 @@ class HelloKittyUI {
         body.classList.toggle("hkui-chat-bubbles-enabled", this.settings.chatBubbles);
         body.classList.toggle("hkui-typing-enabled", this.settings.typingIndicator);
 
-        if (this.settings.chatBubbles && this.settings.notificationSound && !this.dispatcherSubscribed) {
+        if (this.settings.notificationSound && !this.dispatcherSubscribed) {
             this.dispatcher = Webpack.getByKeys("dispatch", "subscribe", {searchExports: true});
             if (this.dispatcher?.subscribe) {
                 this.dispatcher.subscribe("MESSAGE_CREATE", this.onMessageCreate);
                 this.dispatcherSubscribed = true;
             }
-        } else if ((!this.settings.chatBubbles || !this.settings.notificationSound) && this.dispatcherSubscribed) {
+        } else if (!this.settings.notificationSound && this.dispatcherSubscribed) {
             this.dispatcher.unsubscribe("MESSAGE_CREATE", this.onMessageCreate);
             this.dispatcherSubscribed = false;
             this.dispatcher = null;
@@ -158,6 +166,8 @@ class HelloKittyUI {
         if (needsObserver && !this.observer && document.body) {
             this.observer = new MutationObserver(this.onMutations);
             this.observer.observe(document.body, {childList: true, subtree: true});
+        }
+        if (needsObserver) {
             this.refreshDecorations();
             this.refreshChatBubbles();
         } else if (!needsObserver && this.observer) {
@@ -188,28 +198,54 @@ class HelloKittyUI {
 
     }
 
-    onMutations() {
-        if (this.settings.decorations) this.refreshDecorations();
-        if (this.settings.chatBubbles) this.refreshChatBubbles();
+    onMutations(mutations) {
+        for (const mutation of mutations) {
+            if (this.settings.chatBubbles && mutation.target instanceof Element) {
+                const message = mutation.target.closest('[id^="chat-messages-"]');
+                if (message) this.applyChatBubble(message);
+            }
+            for (const node of mutation.addedNodes) this.processAddedNode(node);
+        }
     }
 
     refreshDecorations() {
-        document.querySelectorAll('[class*="channelTextArea"]').forEach(host => {
-            if (host.querySelector(":scope > .hkui-decoration")) return;
-            host.classList.add("hkui-composer-host");
-            const decoration = document.createElement("span");
-            decoration.className = "hkui-decoration";
-            decoration.textContent = "☁️  🎀  ✦  ♡";
-            decoration.setAttribute("aria-hidden", "true");
-            host.appendChild(decoration);
-        });
+        document.querySelectorAll('[class*="channelTextArea"]').forEach(host => this.decorateComposer(host));
     }
 
     refreshChatBubbles() {
         document.querySelectorAll('[id^="chat-messages-"]').forEach(message => {
-            const content = message.querySelector('[class*="markup"]');
-            if (content?.textContent?.trim()) content.classList.add("hkui-inline-bubble");
+            this.applyChatBubble(message);
         });
+    }
+
+    processAddedNode(node) {
+        if (!(node instanceof Element)) return;
+        if (this.settings.decorations) {
+            if (node.matches('[class*="channelTextArea"]')) this.decorateComposer(node);
+            node.querySelectorAll('[class*="channelTextArea"]').forEach(host => this.decorateComposer(host));
+        }
+        if (this.settings.chatBubbles) {
+            const message = node.matches('[id^="chat-messages-"]')
+                ? node
+                : node.closest('[id^="chat-messages-"]');
+            if (message) this.applyChatBubble(message);
+            node.querySelectorAll('[id^="chat-messages-"]').forEach(item => this.applyChatBubble(item));
+        }
+    }
+
+    decorateComposer(host) {
+        if (host.querySelector(":scope > .hkui-decoration")) return;
+        host.classList.add("hkui-composer-host");
+        const decoration = document.createElement("span");
+        decoration.className = "hkui-decoration";
+        decoration.textContent = "☁️  🎀  ✦  ♡";
+        decoration.setAttribute("aria-hidden", "true");
+        host.appendChild(decoration);
+    }
+
+    applyChatBubble(message) {
+        const content = message.querySelector('[class*="markup"]');
+        if (content?.textContent?.trim()) content.classList.add("hkui-inline-bubble");
     }
 
     onMessageCreate(event) {
@@ -231,34 +267,44 @@ class HelloKittyUI {
             ? channel.type === 1 || channel.type === 3
             : !message.guild_id;
 
-        if (wasMentioned || isDirectMessage) this.playNotificationSound();
+        const now = Date.now();
+        if ((wasMentioned || isDirectMessage) && now - this.lastNotificationAt >= 900) {
+            this.lastNotificationAt = now;
+            this.playNotificationSound();
+        }
     }
 
     playNotificationSound() {
         try {
             const AudioContextClass = window.AudioContext || window.webkitAudioContext;
             if (!AudioContextClass) return;
-            const context = new AudioContextClass();
-            const gain = context.createGain();
-            gain.gain.setValueAtTime(0.0001, context.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.045, context.currentTime + 0.025);
-            gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.22);
-            gain.connect(context.destination);
-            for (const [index, frequency] of [880, 1174].entries()) {
-                const oscillator = context.createOscillator();
-                oscillator.type = "sine";
-                oscillator.frequency.value = frequency;
-                oscillator.connect(gain);
-                oscillator.start(context.currentTime + index * 0.1);
-                oscillator.stop(context.currentTime + index * 0.1 + 0.09);
+            if (!this.audioContext || this.audioContext.state === "closed") {
+                this.audioContext = new AudioContextClass();
             }
-            setTimeout(() => context.close(), 400);
+            const context = this.audioContext;
+            const playTone = () => {
+                const gain = context.createGain();
+                gain.gain.setValueAtTime(0.0001, context.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.045, context.currentTime + 0.025);
+                gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.22);
+                gain.connect(context.destination);
+                for (const [toneIndex, frequency] of [880, 1174].entries()) {
+                    const oscillator = context.createOscillator();
+                    oscillator.type = "sine";
+                    oscillator.frequency.value = frequency;
+                    oscillator.connect(gain);
+                    oscillator.start(context.currentTime + toneIndex * 0.1);
+                    oscillator.stop(context.currentTime + toneIndex * 0.1 + 0.09);
+                }
+            };
+            if (context.state === "suspended") context.resume().then(playTone).catch(() => {});
+            else playTone();
         } catch {}
     }
 
     onKeyDown(event) {
         if (!this.settings.chatEffects || !(event.target instanceof HTMLTextAreaElement)) return;
-        if (event.key !== "Enter" || event.shiftKey || event.isComposing) return;
+        if (event.key !== "Enter" || event.shiftKey || event.isComposing || event.repeat) return;
         const composer = event.target.closest('[class*="channelTextArea"]');
         if (!composer || !event.target.value.trim()) return;
         composer.classList.remove("hkui-send-pop");
@@ -359,6 +405,8 @@ class HelloKittyUI {
     }
 
     stop() {
+        if (!this.started) return;
+        this.started = false;
         document.removeEventListener("keydown", this.onKeyDown, true);
         this.observer?.disconnect();
         this.observer = null;
@@ -367,12 +415,15 @@ class HelloKittyUI {
         if (this.dispatcherSubscribed) this.dispatcher?.unsubscribe("MESSAGE_CREATE", this.onMessageCreate);
         this.dispatcherSubscribed = false;
         this.dispatcher = null;
+        if (this.audioContext && this.audioContext.state !== "closed") this.audioContext.close();
+        this.audioContext = null;
         for (const timeout of this.timeouts) clearTimeout(timeout);
         this.timeouts.clear();
         document.body.classList.remove("hkui-cursor-enabled", "hkui-hover-enabled", "hkui-chat-enabled", "hkui-chat-bubbles-enabled", "hkui-typing-enabled");
         document.querySelectorAll(".hkui-decoration").forEach(element => element.remove());
         document.querySelectorAll(".hkui-composer-host").forEach(element => element.classList.remove("hkui-composer-host"));
         document.querySelectorAll(".hkui-inline-bubble").forEach(element => element.classList.remove("hkui-inline-bubble"));
+        document.querySelectorAll(".hkui-send-pop").forEach(element => element.classList.remove("hkui-send-pop"));
         this.musicHud?.remove();
         DOM.removeStyle("HelloKittyUI");
     }
