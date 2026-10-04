@@ -1,19 +1,19 @@
 {
-    "version":  "1.14.7",
-    "title":  "MelowDiscord v1.14.7 - Badge and Theme Stability",
+    "version":  "1.14.8",
+    "title":  "MelowDiscord v1.14.8 - Client Version Reporting",
     "releaseDate":  "2026-10-04",
     "urgent":  false,
     "download_url":  "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
     "banner":  "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
     "meta":  {
-                 "asar_sha256":  "5fc1d2564507a8093516426ca9832e6258e356378b68491dd07885a77f0852e7",
-                 "asar_size_bytes":  2526742,
-                 "asar_size_mb":  "2,41 MB",
-                 "build_timestamp":  "2026-10-04T20:23:20.169Z"
+                 "asar_sha256":  "7f6818b5d3b11252a0c45a9e7611e84e468b65996cd62e73b9b13f27ff344a21",
+                 "asar_size_bytes":  2526876,
+                 "asar_size_mb":  "2.41 MB",
+                 "build_timestamp":  "2026-10-04T20:50:58.058Z"
              },
     "changelog":  [
-                      "Badge profili degisikliklerinin guncel ve tutarli goruntulenmesi iyilestirildi.",
-                      "Gecersiz tema skin degerlerinin arayuzde hata olusturmasi engellendi."
+                      "Aktif istemciler MelowDiscord surumlerini heartbeat ile raporlar.",
+                      "Surum raporlari yalnizca yetkili admin endpointi uzerinden goruntulenir."
                   ],
     "categories":  {
                        "features":  [
