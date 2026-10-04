@@ -1,15 +1,15 @@
 {
-    "version": "1.14.1",
-    "title": "MelowDiscord v1.14.1 - Next-Gen Sürümü 🚀",
-    "releaseDate": "2026-09-30",
+    "version": "1.14.4",
+    "title": "MelowDiscord v1.14.4 - Badge Icon Fix 🚀",
+    "releaseDate": "2026-10-03",
     "urgent": false,
     "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
     "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
     "meta": {
-        "asar_sha256": "21ebbbcadbbee2f75702c804b27d9e622e149e85f17dc7a67871a4a2ac5724d6",
-        "asar_size_bytes": 2489263,
-        "asar_size_mb": "2.37 MB",
-        "build_timestamp": "2026-09-30T17:33:55.855Z"
+        "asar_sha256": "3e14c5228ba1486c8e0860ab32f2274e0276e8f26c011e21da7c4e387d6bf6ae",
+        "asar_size_bytes": 2525958,
+        "asar_size_mb": "2.41 MB",
+        "build_timestamp": "2026-10-04T19:38:52.381Z"
     },
     "changelog": [
         "✨ Yenilenmiş Modern Eklenti & Tema Yönetim Arayüzü (Cam Efektli Glassmorphic)",
@@ -32,7 +32,8 @@
         ],
         "fixes": [
             "CSS gölge parazitleri temizlendi",
-            "ASAR dosya kilitlenme hataları için güvenli yazma köprüsü eklendi"
+            "ASAR dosya kilitlenme hataları için güvenli yazma köprüsü eklendi",
+            "Yüklenmeyen Discord rozet görselleri için profil ve seçim ekranına ikon fallback'i eklendi"
         ]
     }
 }
