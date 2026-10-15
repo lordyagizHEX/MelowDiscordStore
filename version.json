@@ -1,34 +1,35 @@
 {
-    "version": "1.14.11",
-    "title": "MelowDiscord v1.14.11 - Profile Badge Sync Fix",
-    "releaseDate": "2026-10-15",
-    "urgent": false,
-    "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
-    "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
-    "meta": {
-        "asar_sha256": "e67248933481c39466e08c8cacf0fd4b65126edfb346f55db426e99c441252e6",
-        "asar_size_bytes": 2527282,
-        "asar_size_mb": "2.41 MB",
-        "build_timestamp": "2026-10-15T06:53:58.284Z"
-    },
-    "changelog": [
-        "Profil rozetleri Discord'un rozet deposuna da eklenerek karsi tarafta tutarli gosterilir.",
-        "Gecici API/VPN baglanti hatalarinda rozet profili daha hizli yeniden denenir.",
-        "Surum raporlari yalnizca yetkili admin endpointi uzerinden goruntulenir."
+  "version": "1.14.12",
+  "title": "MelowDiscord v1.14.12 - Badge Profile and Verification Fix",
+  "releaseDate": "2026-10-15",
+  "urgent": false,
+  "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
+  "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
+  "meta": {
+    "asar_sha256": "88b6e293098dc21f6d7d71ac9918bcdd2ea255657dc00b796a6933893411e1ee",
+    "asar_size_bytes": 2528761,
+    "asar_size_mb": "2.41 MB",
+    "build_timestamp": "2026-10-15T07:47:53.698Z"
+  },
+  "changelog": [
+    "Profil kimligi ile Discord kullanici kimligi eslestirilerek rozetler dogru profilde gosterilir.",
+    "Profil renderer degisikliklerinde rozet sahibi daha guvenilir sekilde bulunur.",
+    "Daha once dogrulanmis ve sonradan eslesen ASAR icin eski hata uyarisini temizler.",
+    "Surum raporlari yalnizca yetkili admin endpointi uzerinden goruntulenir."
+  ],
+  "categories": {
+    "features": [
+      "Modern plugin ve tema yonetim arayuzu",
+      "Aktif ve kapali eklentiler icin filtre sekmeleri",
+      "Profillerde canli partner bilgileri"
     ],
-    "categories": {
-        "features": [
-            "Modern plugin ve tema yonetim arayuzu",
-            "Aktif ve kapali eklentiler icin filtre sekmeleri",
-            "Profillerde canli partner bilgileri"
-        ],
-        "improvements": [
-            "Rozet degisikliklerinin diger kullanicilarda yenilenmesi iyilestirildi",
-            "Guncelleme penceresinde surum karsilastirmasi"
-        ],
-        "fixes": [
-            "Gecersiz kayitli tema skin degerlerinde radius hatasi engellendi",
-            "Rozet simgeleri icin fallback davranisi iyilestirildi"
-        ]
-    }
+    "improvements": [
+      "Rozet degisikliklerinin diger kullanicilarda yenilenmesi iyilestirildi",
+      "Guncelleme penceresinde surum karsilastirmasi"
+    ],
+    "fixes": [
+      "Gecersiz kayitli tema skin degerlerinde radius hatasi engellendi",
+      "Rozet simgeleri icin fallback davranisi iyilestirildi"
+    ]
+  }
 }
