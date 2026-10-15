@@ -1,20 +1,19 @@
 {
-  "version": "1.14.12",
-  "title": "MelowDiscord v1.14.12 - Badge Profile and Verification Fix",
+  "version": "1.14.13",
+  "title": "MelowDiscord v1.14.13 - Stale Verification Warning Fix",
   "releaseDate": "2026-10-15",
   "urgent": false,
   "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
   "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
   "meta": {
-    "asar_sha256": "88b6e293098dc21f6d7d71ac9918bcdd2ea255657dc00b796a6933893411e1ee",
-    "asar_size_bytes": 2528761,
+    "asar_sha256": "45c24bb79ae0b0a2d2e34d1bc1efe5bf3ab396e1c5f20f1935429e8473d9d59f",
+    "asar_size_bytes": 2529070,
     "asar_size_mb": "2.41 MB",
-    "build_timestamp": "2026-10-15T07:47:53.698Z"
+    "build_timestamp": "2026-10-15T07:59:58.568Z"
   },
   "changelog": [
-    "Profil kimligi ile Discord kullanici kimligi eslestirilerek rozetler dogru profilde gosterilir.",
-    "Profil renderer degisikliklerinde rozet sahibi daha guvenilir sekilde bulunur.",
-    "Daha once dogrulanmis ve sonradan eslesen ASAR icin eski hata uyarisini temizler.",
+    "Daha yeni core surumu calisirken onceki surumden kalan ASAR dogrulama hatasi temizlenir.",
+    "Profil rozetleri icin Discord ve Melow profil kimlikleri birlikte eslestirilir.",
     "Surum raporlari yalnizca yetkili admin endpointi uzerinden goruntulenir."
   ],
   "categories": {
