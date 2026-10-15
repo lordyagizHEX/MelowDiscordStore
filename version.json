@@ -1,19 +1,19 @@
 {
-  "version": "1.14.13",
-  "title": "MelowDiscord v1.14.13 - Stale Verification Warning Fix",
+  "version": "1.14.14",
+  "title": "MelowDiscord v1.14.14 - Profile Badge Refresh Fix",
   "releaseDate": "2026-10-15",
   "urgent": false,
   "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
   "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
   "meta": {
-    "asar_sha256": "45c24bb79ae0b0a2d2e34d1bc1efe5bf3ab396e1c5f20f1935429e8473d9d59f",
+    "asar_sha256": "65e141a166a32ee6a9b8dae23ad59b9c68cdc9d9d00943379be67f564640898c",
     "asar_size_bytes": 2529070,
     "asar_size_mb": "2.41 MB",
-    "build_timestamp": "2026-10-15T07:59:58.568Z"
+    "build_timestamp": "2026-10-15T08:32:50.165Z"
   },
   "changelog": [
-    "Daha yeni core surumu calisirken onceki surumden kalan ASAR dogrulama hatasi temizlenir.",
-    "Profil rozetleri icin Discord ve Melow profil kimlikleri birlikte eslestirilir.",
+    "Melow rozet verisi geldikten sonra Discord profili zorla yenilenerek rozetlerin profil kartında güncel çizilmesi sağlanır.",
+    "Profil rozetleri için Discord ve Melow profil kimlikleri birlikte eşleştirilir.",
     "Surum raporlari yalnizca yetkili admin endpointi uzerinden goruntulenir."
   ],
   "categories": {
@@ -23,7 +23,7 @@
       "Profillerde canli partner bilgileri"
     ],
     "improvements": [
-      "Rozet degisikliklerinin diger kullanicilarda yenilenmesi iyilestirildi",
+      "Rozet verisi yüklendikten sonra açık profilin güncellenmesi iyileştirildi",
       "Guncelleme penceresinde surum karsilastirmasi"
     ],
     "fixes": [
