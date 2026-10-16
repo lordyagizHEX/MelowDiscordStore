@@ -1,17 +1,19 @@
 {
-  "version": "1.14.14",
-  "title": "MelowDiscord v1.14.14 - Profile Badge Refresh Fix",
-  "releaseDate": "2026-10-15",
+  "version": "1.14.16",
+  "title": "MelowDiscord v1.14.16 - Persistent Profile Badges",
+  "releaseDate": "2026-10-16",
   "urgent": false,
   "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
   "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
   "meta": {
-    "asar_sha256": "65e141a166a32ee6a9b8dae23ad59b9c68cdc9d9d00943379be67f564640898c",
-    "asar_size_bytes": 2529070,
+    "asar_sha256": "05dceb6cbb1389ad1e3e7eafd94bd396661b82041a47b01c7f6b3fbd18639379",
+    "asar_size_bytes": 2530276,
     "asar_size_mb": "2.41 MB",
-    "build_timestamp": "2026-10-15T08:32:50.165Z"
+    "build_timestamp": "2026-10-16T09:25:49.274Z"
   },
   "changelog": [
+    "Farklı Discord rozet depoları tekrar çizimde özel rozetleri koruyacak şekilde yamalanır.",
+    "Yayımlanan ASAR ile kurulu dosya eşleştiğinde eski doğrulama uyarısı otomatik temizlenir.",
     "Melow rozet verisi geldikten sonra Discord profili zorla yenilenerek rozetlerin profil kartında güncel çizilmesi sağlanır.",
     "Profil rozetleri için Discord ve Melow profil kimlikleri birlikte eşleştirilir.",
     "Surum raporlari yalnizca yetkili admin endpointi uzerinden goruntulenir."
@@ -23,7 +25,7 @@
       "Profillerde canli partner bilgileri"
     ],
     "improvements": [
-      "Rozet verisi yüklendikten sonra açık profilin güncellenmesi iyileştirildi",
+      "Birden fazla profil rozeti deposunda özel rozetlerin kaybolması engellenir",
       "Guncelleme penceresinde surum karsilastirmasi"
     ],
     "fixes": [
