@@ -1,32 +1,28 @@
 {
-  "version": "1.14.16",
-  "title": "MelowDiscord v1.14.16 - Persistent Profile Badges",
-  "releaseDate": "2026-10-16",
+  "version": "1.14.22",
+  "title": "MelowDiscord v1.14.22 - CustomRPC Diagnostics",
+  "releaseDate": "2026-10-24",
   "urgent": false,
   "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
   "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
   "meta": {
-    "asar_sha256": "05dceb6cbb1389ad1e3e7eafd94bd396661b82041a47b01c7f6b3fbd18639379",
-    "asar_size_bytes": 2530276,
-    "asar_size_mb": "2.41 MB",
-    "build_timestamp": "2026-10-16T09:25:49.274Z"
+    "asar_sha256": "11A93944AAC5D6DCCEED27F5E8212CCEB4B05C74407908994944FF15843CE6A1",
+    "asar_size_mb": "2,43 MB",
+    "asar_size_bytes": 2544811,
+    "build_timestamp": "2026-10-24T11:23:19.537Z"
   },
   "changelog": [
-    "Farklı Discord rozet depoları tekrar çizimde özel rozetleri koruyacak şekilde yamalanır.",
-    "Yayımlanan ASAR ile kurulu dosya eşleştiğinde eski doğrulama uyarısı otomatik temizlenir.",
-    "Melow rozet verisi geldikten sonra Discord profili zorla yenilenerek rozetlerin profil kartında güncel çizilmesi sağlanır.",
-    "Profil rozetleri için Discord ve Melow profil kimlikleri birlikte eşleştirilir.",
-    "Surum raporlari yalnizca yetkili admin endpointi uzerinden goruntulenir."
+    "CustomRPC artık Discord RPC hata yanıtlarını ayarlarda gösterir.",
+    "Application ID temizlenir ve görsel asset key değerleri Discord formatına göre normalize edilir."
   ],
   "categories": {
     "features": [
-      "Modern plugin ve tema yonetim arayuzu",
-      "Aktif ve kapali eklentiler icin filtre sekmeleri",
-      "Profillerde canli partner bilgileri"
+      "Discord Rich Presence özelleştirmesi",
+      "TR/EN çevrilmiş Custom RPC ayar paneli"
     ],
     "improvements": [
-      "Birden fazla profil rozeti deposunda özel rozetlerin kaybolması engellenir",
-      "Guncelleme penceresinde surum karsilastirmasi"
+      "Uygulama kimliği ve Discord IPC bağlantı durumu doğrulanır",
+      "Etkinlik görselleri için HTTPS URL ve asset key desteği"
     ],
     "fixes": [
       "Gecersiz kayitli tema skin degerlerinde radius hatasi engellendi",
