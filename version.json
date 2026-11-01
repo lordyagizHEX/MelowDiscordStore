@@ -1,34 +1,29 @@
 {
-  "version": "1.14.27",
-  "title": "MelowDiscord v1.14.27 - Synchronized Movie Rooms",
+  "version": "1.14.28",
+  "title": "MelowDiscord v1.14.28 - Room Features Removed",
   "releaseDate": "2026-11-01",
   "urgent": false,
   "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
   "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
   "meta": {
-    "asar_sha256": "9a6c807b454d9e55b8466fe93e456f6bdd4e5fed828141f8420f335da63386a5",
-    "asar_size_mb": "2.46 MB",
-    "asar_size_bytes": 2575225,
-    "build_timestamp": "2026-11-01T12:16:42.070Z"
+    "asar_sha256": "e218b065323ecbc45f59afdc5df1c1848036e035f5240fa838df9f48b751322a",
+    "asar_size_mb": "2.43 MB",
+    "asar_size_bytes": 2546402,
+    "build_timestamp": "2026-11-01T12:24:12.841Z"
   },
   "changelog": [
-    "Müzik odası kaldırıldı; yeni odalar yalnızca film odası olarak açılır.",
-    "YouTube IFrame Player API ile oda sahibinin oynat, duraklat ve 10 saniye atla komutları katılımcılara aktarılır.",
-    "Katılımcı oynatıcıları oda durumunu 1,8 saniyede bir izler ve zaman farkını düzeltir.",
-    "Tarayıcı otomatik oynatma kısıtlamaları için katılımcı eşitleme düğmesi eklendi.",
-    "Doğrudan MP4, WebM ve OGV bağlantıları senkron video kaynağı olarak desteklenir."
+    "Film odası arayüzü, gezinme bağlantısı ve istemci modülü kaldırıldı.",
+    "Melow Worker içindeki film odası API uçları ve oda tablolarının otomatik kurulumu kaldırıldı."
   ],
   "categories": {
     "features": [
-      "YouTube ve doğrudan video bağlantılarıyla paylaşımlı film odaları",
-      "Oda sahibi kontrollü oynatma ve ortak video kuyruğu"
+      "Gereksiz film ve müzik odası özellikleri uygulamadan çıkarıldı"
     ],
     "improvements": [
-      "Katılımcı video konumu eşitleme, davet kodları ve sohbet",
-      "Oynatma, duraklatma ve ileri/geri kontrolleri ortak oda durumuna bağlandı"
+      "Uygulama başlangıcından oda menüsü yüklemesi kaldırıldı"
     ],
     "fixes": [
-      "Senkronize edilemeyen siteler ve eski müzik odaları için açıklayıcı uyarılar"
+      "Kullanılmayan oda servislerinin gereksiz D1 tablo kurulumuna yol açması engellendi"
     ]
   }
 }
