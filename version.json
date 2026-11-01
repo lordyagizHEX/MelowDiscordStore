@@ -1,32 +1,34 @@
 {
-  "version": "1.14.26",
-  "title": "MelowDiscord v1.14.26 - Rooms Quick Access",
+  "version": "1.14.27",
+  "title": "MelowDiscord v1.14.27 - Synchronized Movie Rooms",
   "releaseDate": "2026-11-01",
   "urgent": false,
   "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
   "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
   "meta": {
-    "asar_sha256": "7bbaa16e35636c6fbd36b12a1a12dc00c04c0be2ad02022dd78a16888e22b52d",
-    "asar_size_mb": "2,45 MB",
-    "asar_size_bytes": 2574040,
-    "build_timestamp": "2026-11-01T11:39:37.400Z"
+    "asar_sha256": "9a6c807b454d9e55b8466fe93e456f6bdd4e5fed828141f8420f335da63386a5",
+    "asar_size_mb": "2.46 MB",
+    "asar_size_bytes": 2575225,
+    "build_timestamp": "2026-11-01T12:16:42.070Z"
   },
   "changelog": [
-    "Film ve müzik odalarına Discord ana gezinme menüsünden doğrudan erişim eklendi.",
-    "Odalar ayarlar listesinden çıkarıldı ve büyük oda penceresinde açılır.",
-    "Film ve müzik odası adları Türkçe ve İngilizce çevirilere eklendi."
+    "Müzik odası kaldırıldı; yeni odalar yalnızca film odası olarak açılır.",
+    "YouTube IFrame Player API ile oda sahibinin oynat, duraklat ve 10 saniye atla komutları katılımcılara aktarılır.",
+    "Katılımcı oynatıcıları oda durumunu 1,8 saniyede bir izler ve zaman farkını düzeltir.",
+    "Tarayıcı otomatik oynatma kısıtlamaları için katılımcı eşitleme düğmesi eklendi.",
+    "Doğrudan MP4, WebM ve OGV bağlantıları senkron video kaynağı olarak desteklenir."
   ],
   "categories": {
     "features": [
-      "Paylaşımlı film ve müzik odaları",
-      "Müzik arama ve ortak istek kuyruğu"
+      "YouTube ve doğrudan video bağlantılarıyla paylaşımlı film odaları",
+      "Oda sahibi kontrollü oynatma ve ortak video kuyruğu"
     ],
     "improvements": [
-      "Katılımcı ve sohbet görünümü, oda davet kodları",
-      "YouTube ve Spotify embed bağlantıları"
+      "Katılımcı video konumu eşitleme, davet kodları ve sohbet",
+      "Oynatma, duraklatma ve ileri/geri kontrolleri ortak oda durumuna bağlandı"
     ],
     "fixes": [
-      "Gömme izni olmayan harici siteler için güvenli uyarı"
+      "Senkronize edilemeyen siteler ve eski müzik odaları için açıklayıcı uyarılar"
     ]
   }
 }
