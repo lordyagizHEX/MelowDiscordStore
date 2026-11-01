@@ -1,20 +1,19 @@
 {
-  "version": "1.14.23",
-  "title": "MelowDiscord v1.14.23 - Shared Movie and Music Rooms",
+  "version": "1.14.24",
+  "title": "MelowDiscord v1.14.24 - Renderer Startup Recovery",
   "releaseDate": "2026-11-01",
   "urgent": false,
   "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
   "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
   "meta": {
-    "asar_sha256": "1E9758B046CF7B0A19F89CA6218B58C91C9C0A429A21175303EBE5116D05AE43",
+    "asar_sha256": "a45855d61d89ddd547be6b4ae1e38a4ad48968641dd2408c9881f546bb232b47",
     "asar_size_mb": "2,45 MB",
-    "asar_size_bytes": 2570387,
-    "build_timestamp": "2026-11-01T11:00:51.538Z"
+    "asar_size_bytes": 2570996,
+    "build_timestamp": "2026-11-01T11:23:33.498Z"
   },
   "changelog": [
-    "Ortak film ve müzik odaları: davet kodu, katılımcı listesi, sohbet ve oynatma durumu.",
-    "Müzik araması, oda kuyruğu ve şarkı oylaması.",
-    "D1 Worker API ile oda durumu, mesaj ve kuyruk eşitlemesi."
+    "Discord istemcisi ilk Webpack modülünü kaçırırsa çekirdek başlatması ilk ekrandan sonra güvenli biçimde yeniden denenir.",
+    "Renderer başlatma ve IPC hataları artık konsola kaydedilir."
   ],
   "categories": {
     "features": [
