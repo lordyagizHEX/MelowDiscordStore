@@ -1,32 +1,32 @@
 {
-  "version": "1.14.22",
-  "title": "MelowDiscord v1.14.22 - CustomRPC Diagnostics",
-  "releaseDate": "2026-10-24",
+  "version": "1.14.23",
+  "title": "MelowDiscord v1.14.23 - Shared Movie and Music Rooms",
+  "releaseDate": "2026-11-01",
   "urgent": false,
   "download_url": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/melowdiscord.asar",
   "banner": "https://raw.githubusercontent.com/lordyagizHEX/MelowDiscordStore/main/logo.png",
   "meta": {
-    "asar_sha256": "11A93944AAC5D6DCCEED27F5E8212CCEB4B05C74407908994944FF15843CE6A1",
-    "asar_size_mb": "2,43 MB",
-    "asar_size_bytes": 2544811,
-    "build_timestamp": "2026-10-24T11:23:19.537Z"
+    "asar_sha256": "1E9758B046CF7B0A19F89CA6218B58C91C9C0A429A21175303EBE5116D05AE43",
+    "asar_size_mb": "2,45 MB",
+    "asar_size_bytes": 2570387,
+    "build_timestamp": "2026-11-01T11:00:51.538Z"
   },
   "changelog": [
-    "CustomRPC artık Discord RPC hata yanıtlarını ayarlarda gösterir.",
-    "Application ID temizlenir ve görsel asset key değerleri Discord formatına göre normalize edilir."
+    "Ortak film ve müzik odaları: davet kodu, katılımcı listesi, sohbet ve oynatma durumu.",
+    "Müzik araması, oda kuyruğu ve şarkı oylaması.",
+    "D1 Worker API ile oda durumu, mesaj ve kuyruk eşitlemesi."
   ],
   "categories": {
     "features": [
-      "Discord Rich Presence özelleştirmesi",
-      "TR/EN çevrilmiş Custom RPC ayar paneli"
+      "Paylaşımlı film ve müzik odaları",
+      "Müzik arama ve ortak istek kuyruğu"
     ],
     "improvements": [
-      "Uygulama kimliği ve Discord IPC bağlantı durumu doğrulanır",
-      "Etkinlik görselleri için HTTPS URL ve asset key desteği"
+      "Katılımcı ve sohbet görünümü, oda davet kodları",
+      "YouTube ve Spotify embed bağlantıları"
     ],
     "fixes": [
-      "Gecersiz kayitli tema skin degerlerinde radius hatasi engellendi",
-      "Rozet simgeleri icin fallback davranisi iyilestirildi"
+      "Gömme izni olmayan harici siteler için güvenli uyarı"
     ]
   }
 }
